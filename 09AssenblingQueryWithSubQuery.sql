@@ -27,7 +27,7 @@
         where department = 'Toys'
         );
 
---> 2 : Thinking about structure of data ? --> Very very Important
+--> 3 : Thinking about structure of data ? --> Very very Important
     --> 1 : 1=> SUBQUERY in SELECT 
     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/ec8fa3e9-8344-408d-b8c9-bce0ad62eab9
     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/a34bd8a7-0b54-41fa-8504-12df1d1764e6
@@ -41,16 +41,16 @@
         FROM products
         WHERE price > 867;
 
---> 3 : Exercise 
+--> 4 : Exercise 
     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/841f604c-055b-4745-8c3b-b8c92cbdf118
---> 4 : Solution
+--> 5 : Solution
         SELECT name, price, 
          price/(
          Select Max(price)
          FROM phones) AS price_ratio
         FROM phones;
    
---> 5 : 2=> SUBQUERY in FROM 
+--> 6 : 2=> SUBQUERY in FROM 
         https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/ebd14b5b-0408-4422-9192-6a1c84e1d625
         https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/2432de42-f707-4190-b89c-de69cb2097dc
     --> Examples:
@@ -60,13 +60,13 @@
           FROM products
           ) As p 
         WHERE price_weight_ratio > 5;
-    --> 
+--> 7 :
         SELECT *
         FROM (
          SELECT MAX(price)
          FROM products
          ) as p;
---> 6 : Find Average number of orders for all users
+--> 8 : Find Average number of orders for all users
     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/3d7a27a6-5293-4da4-912e-3c61ef5432bf
         SELECT AVG(order_count)
         FROM (
@@ -75,3 +75,12 @@
          GROUP BY
          user_id
         )as o;
+--> 9 : Exercise => https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/99add27a-54db-48b1-87bf-fca3fcd5f866
+--> 10: Solution
+        SELECT Max(average_price) As max_average_price
+        FROM (
+            SELECT AVG(price) as average_price
+            FROM phones 
+            GROUP BY manufacturer
+            ) 
+        AS a;
