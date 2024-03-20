@@ -53,10 +53,16 @@
 --> 5 : 2=> SUBQUERY in FROM 
         https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/ebd14b5b-0408-4422-9192-6a1c84e1d625
         https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/2432de42-f707-4190-b89c-de69cb2097dc
-    --> Query
+    --> Examples:
         SELECT name, price_weight_ratio
         FROM (
           SELECT name, price / weight AS price_weight_ratio
           FROM products
           ) As p 
         WHERE price_weight_ratio > 5;
+    --> 
+        SELECT *
+        FROM (
+         SELECT MAX(price)
+         FROM products
+         ) as p;
