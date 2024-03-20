@@ -24,6 +24,9 @@
       from products
       where department = 'Toys'
       );
---> 2 : Thinking about structure of data?
+--> 2 : Thinking about structure of data ? --> Very very Important
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/ec8fa3e9-8344-408d-b8c9-bce0ad62eab9
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/a34bd8a7-0b54-41fa-8504-12df1d1764e6
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/75586833-6d63-4991-ab74-6e5f488537b3
 
 
