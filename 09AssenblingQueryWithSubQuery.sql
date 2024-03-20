@@ -66,3 +66,12 @@
          SELECT MAX(price)
          FROM products
          ) as p;
+--> 6 : Find Average number of orders for all users
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/3d7a27a6-5293-4da4-912e-3c61ef5432bf
+        SELECT AVG(order_count)
+        FROM (
+         SELECT user_id, COUNT(*) as order_count
+         FROM orders
+         GROUP BY
+         user_id
+        )as o;
