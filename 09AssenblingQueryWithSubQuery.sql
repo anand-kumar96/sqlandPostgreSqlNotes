@@ -24,3 +24,5 @@
       from products
       where department = 'Toys'
       );
+--> 2 : Thinking about structure of data?
+
