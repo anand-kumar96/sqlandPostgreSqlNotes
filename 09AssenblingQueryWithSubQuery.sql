@@ -84,3 +84,22 @@
             GROUP BY manufacturer
             ) 
         AS a;
+
+--> 11 : 2=> SUBQUERY in JOIN 
+     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/7eb6e1a3-ff13-4490-9fd9-5c20f1c76c1c
+     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/43387efa-e7f0-4dd0-9f41-a74f5e889b9a
+     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/d45aed59-1fc1-404f-97b7-5ba7f11bed75
+         SELECT first_name
+         FROM users
+         JOIN (
+            Select user_id
+            FROM orders
+            WHERE product_id = 3
+         ) AS o 
+         ON o.user_id = users.id;
+    --> or
+        SELECT first_name
+        FROM users
+        JOIN orders As o
+        ON o.user_id = users.id
+        WHERE o.product_id =3;
