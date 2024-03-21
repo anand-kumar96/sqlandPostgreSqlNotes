@@ -8,3 +8,4 @@
 -->03: Solution
        SELECT COUNT(DISTINCT manufacturer)
        FROM phones;
+       
