@@ -137,65 +137,85 @@
         SELECT name,price
         FROM phones 
         WHERE price > (
-        SELECT price
-        FROM phones 
-        WHERE name = 'S5620 Monte' AND manufacturer = 'Samsung'
+         SELECT price
+         FROM phones 
+         WHERE name = 'S5620 Monte' AND manufacturer = 'Samsung'
         );
 --> 16: Not In Opetrator with a list : https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/5a61429d-e25b-4fcc-a3dc-6f5d638ac2ed
     --> Solution
         SELECT name,department
         FROM products
         WHERE department NOT IN (
-        SELECT department
-        FROM products
-        WHERE price < 100
+         SELECT department
+         FROM products
+         WHERE price < 100
         );
---> 17: A New Where Operator : https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/91ca9d42-2ebe-4171-9499-6ebbc4300f19
+--> 17: A New Where Keyword : https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/91ca9d42-2ebe-4171-9499-6ebbc4300f19
     --> Solution
         SELECT name,department,price
         FROM products
         WHERE price > (
-        SELECT Max(price)
-        FROM products
-        WHERE department = 'Industrial'
+         SELECT Max(price)
+         FROM products
+         WHERE department = 'Industrial'
         );
     --> or
         SELECT name,department,price
         FROM products
         WHERE price > All (
-        SELECT price
-        FROM products
-        WHERE department = 'Industrial'
+         SELECT price
+         FROM products
+         WHERE department = 'Industrial'
         );
     --> when less expensive
         SELECT name,department,price
         FROM products
         WHERE price < All (
-        SELECT price
-        FROM products
-        WHERE department = 'Industrial'
+         SELECT price
+         FROM products
+         WHERE department = 'Industrial'
         );
     --> when more and equal to expensive
         SELECT name,department,price
         FROM products
         WHERE price >= All (
-        SELECT price
-        FROM products
-        WHERE department = 'Industrial'
+         SELECT price
+         FROM products
+         WHERE department = 'Industrial'
         );
     --> when equal to expensive
         SELECT name,department,price
         FROM products
         WHERE price = All (
-        SELECT price
-        FROM products
-        WHERE department = 'Industrial'
+         SELECT price
+         FROM products
+         WHERE department = 'Industrial'
         );
     --> when not eqaul to expensive
         SELECT name,department,price
         FROM products
         WHERE price <> All (
-        SELECT price
+         SELECT price
+         FROM products
+         WHERE department = 'Industrial'
+        );
+--> 18: Some Keyword : Some is actually an Alias to Any => so Some and Any both are same => means atleast
+    --> price >Some (20,100) --> price is greater than atleast one value from 20 and 100
+    --> Question: https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/7ed17738-664e-4801-bedb-b7a6f174d0e2
+        SELECT name,department,price
         FROM products
-        WHERE department = 'Industrial'
+        WHERE price > SOME (
+         SELECT price
+         FROM products
+         WHERE department = 'Industrial'
+        );
+
+--> 14: Exercise : https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/b5bb1913-c20b-4f1b-8b94-d4ff51d0e3cd
+--> 15: Solution
+        SELECT name, manufacturer, price
+        FROM phones
+        WHERE price > ANY(
+         SELECT price
+         FROM phones
+         WHERE manufacturer = 'Samsung'
         );
