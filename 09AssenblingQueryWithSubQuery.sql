@@ -132,3 +132,70 @@
          Select AVG(price)
          FROM products
         );
+--> 14: Exercise : https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/90c1f27a-2ae6-4f83-aaa0-b33e838e19e0
+--> 15: Solution
+        SELECT name,price
+        FROM phones 
+        WHERE price > (
+        SELECT price
+        FROM phones 
+        WHERE name = 'S5620 Monte' AND manufacturer = 'Samsung'
+        );
+--> 16: Not In Opetrator with a list : https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/5a61429d-e25b-4fcc-a3dc-6f5d638ac2ed
+    --> Solution
+        SELECT name,department
+        FROM products
+        WHERE department NOT IN (
+        SELECT department
+        FROM products
+        WHERE price < 100
+        );
+--> 17: A New Where Operator : https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/91ca9d42-2ebe-4171-9499-6ebbc4300f19
+    --> Solution
+        SELECT name,department,price
+        FROM products
+        WHERE price > (
+        SELECT Max(price)
+        FROM products
+        WHERE department = 'Industrial'
+        );
+    --> or
+        SELECT name,department,price
+        FROM products
+        WHERE price > All (
+        SELECT price
+        FROM products
+        WHERE department = 'Industrial'
+        );
+    --> when less expensive
+        SELECT name,department,price
+        FROM products
+        WHERE price < All (
+        SELECT price
+        FROM products
+        WHERE department = 'Industrial'
+        );
+    --> when more and equal to expensive
+        SELECT name,department,price
+        FROM products
+        WHERE price >= All (
+        SELECT price
+        FROM products
+        WHERE department = 'Industrial'
+        );
+    --> when equal to expensive
+        SELECT name,department,price
+        FROM products
+        WHERE price = All (
+        SELECT price
+        FROM products
+        WHERE department = 'Industrial'
+        );
+    --> when not eqaul to expensive
+        SELECT name,department,price
+        FROM products
+        WHERE price <> All (
+        SELECT price
+        FROM products
+        WHERE department = 'Industrial'
+        );
