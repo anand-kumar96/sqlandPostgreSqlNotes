@@ -104,4 +104,31 @@
         ON o.user_id = users.id
         WHERE o.product_id =3;
 
---> 12 : 3=> SUBQUERY in WHERE 
+--> 12: 3=> SUBQUERY in WHERE =>USEFUL***
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/f25fb0e7-fc83-41b8-bfca-d3096d0fae30 
+        SELECT o.id, p.price/p.weight as price_weight_ratio
+        FROM orders As o
+        JOIN products As p
+        ON p.id= o.product_id
+        WHERE p.price/p.weight > 5;
+    --> using SubQueries
+        SELECT id
+        FROM orders
+        WHERE product_id IN (
+        SELECT id 
+        FROM products
+        WHERE price/weight > 5
+        );
+    --> https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/2e490d70-fcee-4ba7-8c31-8d46e8d48ba1
+    --> https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/70e84bbb-e5e9-4080-a7d0-d36dc09814e7
+    --> https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/d03366d6-f9a7-4771-b971-8bf3ae4fa4ce
+    --> https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/b0349f19-451b-499c-8968-0c3d4279b4da
+
+--> 13: https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/25c577d1-c617-4929-9700-40cd6ba784e7 
+    --> https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/f3f5674a-240e-445b-8213-36c4d00cbc08
+        SELECT name 
+        FROM products
+        WHERE price > (
+         Select AVG(price)
+         FROM products
+        );
