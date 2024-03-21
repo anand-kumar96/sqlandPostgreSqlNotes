@@ -210,8 +210,8 @@
          WHERE department = 'Industrial'
         );
 
---> 14: Exercise : https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/b5bb1913-c20b-4f1b-8b94-d4ff51d0e3cd
---> 15: Solution
+--> 19: Exercise : https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/b5bb1913-c20b-4f1b-8b94-d4ff51d0e3cd
+--> 20: Solution
         SELECT name, manufacturer, price
         FROM phones
         WHERE price > ANY(
