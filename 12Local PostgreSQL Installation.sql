@@ -1,0 +1,5 @@
+--> Go to => postgresql.org/download/windows and click download installer link and download latest version beta and install it.
+--> enter any password
+--> in start menu search pgAdmin :  This ia a database management platform , now launch this
+--> now it ask to enter password
+--> try to use same password
