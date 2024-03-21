@@ -214,7 +214,7 @@
 --> 20: Solution
         SELECT name, manufacturer, price
         FROM phones
-        WHERE price > ANY(
+        WHERE price > ALL(
          SELECT price
          FROM phones
          WHERE manufacturer = 'Samsung'
