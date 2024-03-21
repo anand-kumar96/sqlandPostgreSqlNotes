@@ -207,7 +207,7 @@
         WHERE price > SOME (
          SELECT price
          FROM products
-         WHERE department = 'Industrial'
+         WHERE department = 'Indust;rial'
         );
 
 --> 19: Exercise : https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/b5bb1913-c20b-4f1b-8b94-d4ff51d0e3cd
@@ -219,3 +219,50 @@
          FROM phones
          WHERE manufacturer = 'Samsung'
         );
+--> 21: Correlated SubQuery: A correlated subquery is a subquery that uses values from the outer query.
+        /* A correlated scalar subquery is used in the same way that a column is used, 
+           while an uncorrelated scalar subquery is used in the way that a constant value is used. 
+           Scalar subqueries are not valid in the following cases: When used in ORDER BY and GROUP BY clauses.
+        */
+    --> We can use Correlated SubQuery any where not only in Where Keywords.
+    --> Watch again for clearity
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/f59e66c7-b42f-4cf8-ac85-ebea4e5e5a7d
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/d4ee8a1a-6d74-4b6f-beff-a61fe262e038
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/1e2a0eb5-a1f3-4911-a4d0-154448cff125
+        SELECT name, department, price
+        FROM products as p1
+        WHERE p1.price = (
+          SELECT Max(price)
+          FROM products as p2
+          WHERE p2.department = p1.department
+        );
+
+--> 22: More on Correlated SubQuery : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/8823319b-baa7-48b5-91ad-998eff11d480
+        SELECT p.name, p.department, (
+         SELECT Count(*) as product_count
+         FROM orders As o
+         WHERE o.product_id= p.id
+        )
+        FROM products as p; 
+--> 23: Select without a Form : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/8de6ac39-9b8e-46a5-8a61-d2af6bd04e15
+    --> its work for only single value
+        SELECT (
+          SELECT name
+          FROM products 
+          WHERE id =1
+        );
+    --> other
+        SELECT (
+          SELECT MAX(price)
+          FROM products 
+        ),(
+          SELECT MIN(price)
+          FROM products 
+        );
+
+--> 24: Exercise : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/b8ef5d96-642a-467f-83db-1151bd3d2f8e
+--> 25: Solution
+        SELECT 
+         (SELECT MAX(price) FROM phones) AS max_price, 
+         (SELECT MIN(price) FROM phones) AS min_price, 
+         (SELECT AVG(price) FROM phones) AS avg_price;
