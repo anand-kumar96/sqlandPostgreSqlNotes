@@ -8,7 +8,7 @@
     --> or https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/d3bb3029-0b55-4397-86bb-e60c5c77ebf9
         SELECT name,weight, department, LEAST(price*0.5, 400) as product_price
         FROM products;
---> 02: The Case Keyword: https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/e409d1d5-5650-4ea7-89ca-3011a017b713
+--> 03: The Case Keyword: https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/e409d1d5-5650-4ea7-89ca-3011a017b713
         SELECT
         name,
         price,
