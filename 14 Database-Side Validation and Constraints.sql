@@ -21,12 +21,12 @@
     --> it will add price as null : that is big issue so we not some type of validation 
     --> so we can solve it two way : before creating table or after creating table
     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/88bd33e8-8ae5-461e-8465-4e6db2b30616
-            CREATE TABLE (
-            id SERIAL PRIMARY KEY,
-            name VARCHAR(50),
-            department VARCHAR(50),
-            price INTEGER NOT NULL,
-            weight INTEGER
+        CREATE TABLE (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(50),
+        department VARCHAR(50),
+        price INTEGER NOT NULL,
+        weight INTEGER
         );
     --> or
         ALTER TABLE products
