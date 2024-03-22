@@ -4,7 +4,8 @@
 
 --> 02: Schema Design using--> 
     --> Diagram based--> ondras.zarovi.cz/sql/demo : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/41513233-8c08-4957-9e5c-cee92d5e8082
-    --> Code based--> dbdiagram.io : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/41513233-8c08-4957-9e5c-cee92d5e8082
+    
+--> 03: Code based--> dbdiagram.io : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/41513233-8c08-4957-9e5c-cee92d5e8082
         Table users {
         id integer [primary key]
         username varchar
@@ -38,9 +39,35 @@
         post_id integer [ref:  > users.id ]
         user_id integer [ref:  > posts.id ]
         }
-        
+
         Table posts {
         id integer [primary key]
         title varchar
         user_id integer [ref:  > users.id ]
+        }
+
+-->4&5: Schema Design      
+        Table users {
+        id SERIAL [pk, increment]
+        username VARCHAR(30)
+        created_at TIMESTAMP
+        updated_at TIMESTAMP
+        }
+
+        Table posts {
+        id SERIAL [pk, increment]
+        url VARCHAR(200)
+        created_at TIMESTAMP
+        updated_at TIMESTAMP
+        user_id INTEGER [REF: > users.id]
+
+        }
+
+        Table comments {
+        id SERIAL [pk, increment]
+        contents VARCHAR(240)
+        created_at TIMESTAMP
+        updated_at TIMESTAMP
+        user_id INTEGER [REF: > users.id]
+        post_id INTEGER [REF: > posts.id]
         }
