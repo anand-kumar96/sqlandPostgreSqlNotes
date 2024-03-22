@@ -5,11 +5,11 @@
     --> Create validation database and open query tols when we open query tools then we are using a specific databse
     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/ff797693-3ee4-4752-9f39-1f8409825828
         CREATE TABLE (
-            id SERIAL PRIMARY KEY,
-            name VARCHAR(50),
-            department VARCHAR(50),
-            price INTEGER,
-            weight INTEGER
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(50),
+        department VARCHAR(50),
+        price INTEGER,
+        weight INTEGER
         );
     --> to see table--> click on validation database --> expand it click on Schemas--> public -->Tables --> products(table name) --> right click => view/edit data
         INSERT INTO products(name,department,price,weight)
