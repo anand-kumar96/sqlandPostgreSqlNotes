@@ -116,4 +116,56 @@
         */
 --> THIRD FORM OF VALIDATION : IS A VALUE >,<,>=,<=,= SOME OTHER VALUE?
 
---> 08: 
+--> 08: CHECK Constraints : When don't want to put price value negative 
+        INSERT INTO products(name,department,price,weight)
+        VALUES ('Belt','Clothes',-100,1);
+    --> So we need validation : So we use CHECK validation.
+    --> When Creating a table
+        CREATE TABLE (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(50),
+        department VARCHAR(50) NOT NULL,
+        price INTEGER CHECK(price>0),
+        weight INTEGER
+        );
+    --> After Table was created
+        ALTER TABLE products
+        ADD CHECK(price>0);
+
+    --> after running this command
+        INSERT INTO products(name,department,price,weight)
+        VALUES ('Belt','Clothes',-100,1);
+        /*
+        ERROR:  Failing row contains (9, Belt, Clothes, -100, 1).new row for relation "products" violates check constraint "products_price_check" 
+        ERROR:  new row for relation "products" violates check constraint "products_price_check"
+        SQL state: 23514
+        Detail: Failing row contains (9, Belt, Clothes, -100, 1).
+        */
+    --> We can see CHECK constraint and remove it simillar to UNIQUE contraints
+
+--> 09: Check Over Multiple Columns
+    --> Creating a new table orders
+        CREATE TABLE orders(
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(50) NOT NULL,
+        created_at TIMESTAMP NOT NULL,
+        est_delivery TIMESTAMP NOT NULL,
+        CHECK (created_at < est_delivery)
+        );
+    --> now inserting data
+        INSERT INTO orders(name, created_at,est_delivery)
+        VALUES ('Shirt','2000-Nov-20 01:00 AM', '2000-Nov-19 01:00 AM'); --> its successfully added
+
+        INSERT INTO orders(name, created_at,est_delivery)
+        VALUES ('Shirt','2000-Nov-20 01:00 AM', '2000-Nov-19 01:00 AM'); --> its throw error
+        /*
+        ERROR:  Failing row contains (2, Shirt, 2000-11-20 01:00:00, 2000-11-19 01:00:00).new row for relation "orders" violates check constraint "orders_check" 
+        ERROR:  new row for relation "orders" violates check constraint "orders_check"
+        SQL state: 23514
+        Detail: Failing row contains (2, Shirt, 2000-11-20 01:00:00, 2000-11-19 01:00:00).
+        */
+
+--> 10: Where are We Applying Validation ?
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/2a1adbef-0cb9-440e-892e-fa788b777453
+    --> add easy validation on web server and difficult validation on database
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/74f55c4c-b57e-44c5-9eb5-fb5372a63e00
