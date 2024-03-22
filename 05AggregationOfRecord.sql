@@ -1,6 +1,7 @@
--------------------------------> AGGREGATION OF RECORDS <---------------------------------
---> 1 : https://github.com/anand-kumar96/SQL/assets/106487247/a6237104-0fa1-450f-b7a9-4c9cf21e9d36
---> 2 : Grouping --> Group By : Reduces many rows down to fewer rows
+--> 01: AGGREGATION OF RECORDS
+    --> https://github.com/anand-kumar96/SQL/assets/106487247/a6237104-0fa1-450f-b7a9-4c9cf21e9d36
+
+--> 02: Grouping --> Group By : Reduces many rows down to fewer rows
         Select user_id 
         FROM comments
         GROUP BY user_id;
@@ -12,7 +13,8 @@
         FROM comments
         GROUP BY user_id;
     --> Error: column "comments.contents" must appear in the GROUP BY clause or be used in an aggregate function
---> 3 : Aggregate Function : https://github.com/anand-kumar96/SQL/assets/106487247/f9771659-db8f-4be3-92d8-08dba972bdba
+
+--> 03: Aggregate Function : https://github.com/anand-kumar96/SQL/assets/106487247/f9771659-db8f-4be3-92d8-08dba972bdba
     --> Query;
         Select user_id, COUNT(user_id)
         FROM comments
@@ -25,15 +27,16 @@
         4       	22
         2	        18
           
-   -->  Other Query
-   -->    Max : 100         Min: 1            Avg: 50.5         Count:100           Sum:5050
+    -->  Other Query
+    -->    Max : 100         Min: 1            Avg: 50.5         Count:100           Sum:5050
         Select MAX(id)    Select MIN(id)     Select AVG(id)    Select COUNT(id)    Select SUM(id)  
         FROM comments;    FROM comments;     FROM comments;    FROM comments;      FROM comments;
 
-   -->  We can not use it :-> column "comments.id" must appear in the GROUP BY clause or be used in an aggregate function
+    -->  We can not use it :-> column "comments.id" must appear in the GROUP BY clause or be used in an aggregate function
         Select SUM(id), id 
         FROM comments;
---> 4 : Group By and Aggregate combine
+
+--> 04: Group By and Aggregate combine
         Select user_id, Max(id)       Select user_id, Count(id)
         From comments                 From comments
         Group By user_id;             Group By user_id;
@@ -45,15 +48,16 @@
            4	  96                   4	 22
            2	  91                   2	 18
 
---> 5 : When We use Aggregate function count--> then null value not counted 
+--> 05: When We use Aggregate function count--> then null value not counted 
     --> Since we have 21 photos in photos table and 20 user with 1 user_id null and if we do this query then it given--> 20
         Select Count(user_id) 
         FROM photos;
-   -->  20 Ans. Because it didnot counted null user_id
-   -->  to handle it better to count number of rows =>   Select Count(*) 
+
+    --> 20 Ans. Because it didnot counted null user_id
+    --> to handle it better to count number of rows =>   Select Count(*) 
         Select Count(*) 
         FROM photos;
-   -->  21 Ans. 
+    --> 21 Ans. 
         Select user_id,Count(*) 
         FROM comments
         Group BY user_id;
@@ -65,7 +69,7 @@
          4	   22
          2	   18
 
---> 6 : Find the number of comments for each photo
+--> 06: Find the number of comments for each photo
         Select Count(*)
         FROM comments
         GROUP BY photo_id;
@@ -76,7 +80,7 @@
           5	    20
           2	    19
           4	    17
-   -->             
+    -->             
         Select photo_id, Count(*)
         FROM comments
         GROUP BY photo_id
@@ -93,7 +97,7 @@
         Select author_id, Count(*)
         FROM books
         GROUP BY author_id;
-   -->  Ans:
+    --> Ans:
         author_id	auther_total_books
            3	            1
            4	            1
@@ -114,27 +118,28 @@
         Stephen King	   1
 
 --> 11: Different Keywords : https://github.com/anand-kumar96/SQL/assets/106487247/3b98009f-5f76-43fd-8df8-19dd92606feb
-   -->  Having is Similar to where it is used to filter the set of groups so used with groups.
-      : https://github.com/anand-kumar96/SQL/assets/106487247/dc9396c7-096e-458e-ac64-d90f4372b8fd
-      : https://github.com/anand-kumar96/SQL/assets/106487247/ca5487d3-ac5f-4f58-99ce-3ddb2de34601
-      : https://github.com/anand-kumar96/SQL/assets/106487247/c80d4dde-1ded-4850-911a-d134de72b03e
+    --> Having is Similar to where it is used to filter the set of groups so used with groups.
+        : https://github.com/anand-kumar96/SQL/assets/106487247/dc9396c7-096e-458e-ac64-d90f4372b8fd
+        : https://github.com/anand-kumar96/SQL/assets/106487247/ca5487d3-ac5f-4f58-99ce-3ddb2de34601
+        : https://github.com/anand-kumar96/SQL/assets/106487247/c80d4dde-1ded-4850-911a-d134de72b03e
                   
--->12 : Find the number of comments for each photo where the photo_id is less than 3 and the photo has more that 2 comments
+--> 12: Find the number of comments for each photo where the photo_id is less than 3 and the photo has more that 2 comments
         Select photo_id, Count(*) as total_comments
         FROM comments
         WHERE photo_id < 3 --> to filter individual row
         Group BY photo_id
         HAVING Count(*) > 2; --> filter groups    
-   -->  Or this way
+    --> Or this way
         Select photo_id, Count(*) as total_comments
         FROM comments
         Group BY photo_id
         HAVING photo_id < 3 AND Count(*) > 2; 
-   -->  Ans:
+    --> Ans:
         photo_id  total_comments
           1	     19
           2	     19
--->13 : Question: https://github.com/anand-kumar96/SQL/assets/106487247/2a06b14a-adf0-4fb5-aedf-033633d1fd53
+
+--> 13: Question: https://github.com/anand-kumar96/SQL/assets/106487247/2a06b14a-adf0-4fb5-aedf-033633d1fd53
         Select user_id, Count(*)
         FROM comments
         WHERE photo_id <= 50
@@ -145,7 +150,7 @@
           1	   23
           4	   22
 
--->14&15: Question: https://github.com/anand-kumar96/SQL/assets/106487247/a0459440-c96e-451a-bc2c-f0228ddbca96
+-->14&15:Question: https://github.com/anand-kumar96/SQL/assets/106487247/a0459440-c96e-451a-bc2c-f0228ddbca96
     --> Explanation : 
         https://github.com/anand-kumar96/SQL/assets/106487247/36c9258a-d6de-401c-865b-110bafd7cd39
         https://github.com/anand-kumar96/SQL/assets/106487247/b66915a8-84c2-40ec-820d-3d376c5c5697
