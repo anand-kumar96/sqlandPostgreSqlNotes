@@ -30,8 +30,8 @@
     --> id	        name           	        department         price  weight
         38    	   Awesome Fresh Keyboard	     Home	        982	   30
         86         Refined Concrete Pants	     Sports         724	   2
-        46 	   Incredible Granite Bacon           Music	        982    9
-        80         Small Fresh Gloves	            Garden         991    8
+        46 	   Incredible Granite Bacon          Music	        982    9
+        80         Small Fresh Gloves	              Garden         991    8
         24	   Small Plastic Soap	             Beauty         345    1
         7	   Incredible Granite Mouse          Home           989	   2
         1	   Practical Fresh Shirt	     Toys           876	   3
