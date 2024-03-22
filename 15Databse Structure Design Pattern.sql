@@ -60,7 +60,6 @@
         created_at TIMESTAMP
         updated_at TIMESTAMP
         user_id INTEGER [REF: > users.id]
-
         }
 
         Table comments {
