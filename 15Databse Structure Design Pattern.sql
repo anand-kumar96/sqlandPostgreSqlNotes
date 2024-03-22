@@ -9,6 +9,7 @@
         id integer [primary key]
         username varchar
         }
+
         Table comments {
         id integer [primary key]
         contents varchar
@@ -37,8 +38,7 @@
         post_id integer [ref:  > users.id ]
         user_id integer [ref:  > posts.id ]
         }
-
-
+        
         Table posts {
         id integer [primary key]
         title varchar
