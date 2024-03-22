@@ -1,5 +1,7 @@
+--> FIRST FORM OF VALIDATION : IS A GIVEN VALUE DEFINED? 
+
 --> 1&2:https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/bdc59d78-06f4-4259-a847-e7cc3a2d33bc
-    --> Create product table and insertdata in database  
+    --> Create product table and insertdata in database 
     --> Create validation database and open query tols when we open query tools then we are using a specific databse
     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/ff797693-3ee4-4752-9f39-1f8409825828
         CREATE TABLE (
@@ -48,6 +50,8 @@
     --> Now we can add new value
         INSERT INTO products(name,department,weight)
         VALUES ('Gloves','Tools',1);
+
+--> SECOND FORM OF VALIDATION : IS A VALUE IN ITS COLUMN IS UNIQUE?
 
 --> 05: Applying a unique constrains to a column
         INSERT INTO products(name,department,price,weight)
@@ -110,3 +114,6 @@
         SQL state: 23505
         Detail: Key (name, department)=(Shirt, Clothes) already exists.
         */
+--> THIRD FORM OF VALIDATION : IS A VALUE >,<,>=,<=,= SOME OTHER VALUE?
+
+--> 08: 
