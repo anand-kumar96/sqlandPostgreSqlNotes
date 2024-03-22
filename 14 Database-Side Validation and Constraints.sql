@@ -67,3 +67,46 @@
         ADD UNIQUE(name);
     --> we can't execute this command unless all the value in name column is unique.
     --> ERROR: could not create unique index "products_name_key" DETAIL: Key (name)=(Shirt) is duplicated.
+    --> So can rename that value or can delete that row
+        Delete from products 
+        Where name = 'Shirt';
+    --> or update
+        UPDATE products
+        SET name = 'Shoes', department = 'Sports'
+        WHERE name = 'Shirt' AND department = 'Clothes';
+    --> now run
+        ALTER TABLE products
+        ADD UNIQUE(name);
+
+--> 07: To add Multi Column Uniquness
+    --> When Creating a table
+        CREATE TABLE (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(50),
+        department VARCHAR(50) NOT NULL,
+        price INTEGER DEFAULT 9999,
+        weight INTEGER
+        UNIQUE(name,department)
+        );
+    --> After Table was created
+        ALTER TABLE products
+        ADD UNIQUE(name, department);
+    --> To remove Existing Unique Constraints --> go to click validation database -->Schemas--> public -->Tables -->products-->Constraints--> see all key
+    --> run 
+        ALTER TABLE products
+        DROP CONSTRAINT products_name_key; --> it will delete name uniqueness
+    --> now we can add multiple uniquness constraints
+        ALTER TABLE products
+        ADD UNIQUE(name,department);
+    --> now add shirt with different department 
+        INSERT INTO products(name,department,price,weight)
+        VALUES ('Shirt','PartyWear',200,1); --> its successfully added
+    --> now add shirt with existing department 
+        INSERT INTO products(name,department,price,weight)
+        VALUES ('Shirt','Clothes',200,1); --> its throw error
+        /*
+        ERROR:  Key (name, department)=(Shirt, Clothes) already exists.duplicate key value violates unique constraint "products_name_department_key" 
+        ERROR:  duplicate key value violates unique constraint "products_name_department_key"
+        SQL state: 23505
+        Detail: Key (name, department)=(Shirt, Clothes) already exists.
+        */
