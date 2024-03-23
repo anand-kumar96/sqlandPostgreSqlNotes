@@ -1,25 +1,24 @@
 ----->  Database For Photo Sharing App ---> it hase users, photos, comments, likes TABLE 
 --> 01: Approach to database design
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/6c37ab08-579c-4cce-88cc-d03a9bb4024b
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/a016e6df-957a-4870-9550-43e738d398df
   
 --> 02: One to Many and Many to one Relationships
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/d2c86408-ff11-47c0-96f4-4e8ab4fd9de3
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/37d655c0-e2b4-484f-93c0-c2b6e0563e2c
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/1f01fba7-b913-4ea1-bfe6-bc41c9d3d2a9
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/1ffe2ce5-b1f7-402f-a0d0-fe439019046b
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/0214f6fe-a515-49cf-a62a-ccf2d141dcb0
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/3eea7523-6c89-434b-a2ed-7021a307dbc5
   
 --> 03: one to one and many to many
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/79d8969e-1061-4051-95c0-76e719cd52e3
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/ce55f7d3-a1c4-43c6-9fb7-bf79d2ccf227
-  
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/a8de95d2-3874-4db7-8185-2c9a92905128
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/45067a9b-44b6-4393-9743-ce0fcd6fc67f
 --> 04: Primary and Foregin key  ==> all four realtionship always done by using foregin key
     --> Primary keys serve as unique identifiers for each row in a database table. ---> always unique
     --> Foreign keys link data in one table to the data in another table.
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/ad85b7b3-a625-4851-88f5-4d261b2c241f
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/8a129b43-7407-4786-9e7e-da9ffd7f06b8
 
 --> 05: Understanding Foregin Key
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/cb8b6830-176c-4bcc-9297-0a2adc972e81
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/4f0ad70c-ff01-4590-866a-35b68832df46
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/2444c690-3f77-493d-82fe-715894f6a3a8
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/1ce3a5ed-a9c1-4639-8493-b26486a490e5
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/ead3e147-0838-4e0c-98a6-7378661fc75b
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/73fbe5a2-1b53-44cc-a95a-ca732b649f62
 
 --> 06: Create user table and fill data => Serial : Auto generate Id
     --> creating table
@@ -68,7 +67,7 @@
           ('http://img10.jpg',1),
           ('http://img4.jpg',2);
 
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/7795668d-58fa-462b-975d-0f56dd2b7159
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/47d3808c-b4ef-4840-a1b1-9a3d0b5d7af1
  
     --> RUNNING QUIERS ON ASSOCIATED DATA
     --> Find all photos created by user with id 4
@@ -116,11 +115,11 @@
         3. We insert a photo that is not tied  to any user: Put in a value of 'NULL' for the user_id : Insert into photos (url,user_id) Values("http://img5.jpg",NULL); ==> put user_id : Null
 
     --> deleting data cases
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/8f1294dc-8228-469b-ad37-4ea8deb95b26
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/5fa1ac5e-2fac-446a-be64-2417f089d2c9
     --> what will happen if we delete user 1 => then some dangling reference will be in photos foregin key 
     --> means photos trying to reference to user that doesnot exist  -> since we are using serial in useres id so never ever that id will be exist after delete
     --> So solution is that we have make some option befoe deleting user there are couple of option :
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/85ebcc74-e1a5-4bae-b13f-f0b397667a72
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/38bcc704-945d-4f11-a877-4578368db537
     --> Testing deleting Constraints
     --> create photos table and add data after deleting previous table users and photos
     --> create users table
@@ -206,8 +205,8 @@
         case 5 : -- see later.
 
     --> DataBase schema diagram : VVI #############
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/98fba156-5ea4-4b6d-81f0-761f1568ea33
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/1e677a31-6a88-464e-9acb-dbb8c6ddabcd
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/c736beb3-7f5d-4eb6-8769-7ce25cb6fe91
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/0f23ab73-7328-4d25-9a8b-342ac6912131
             
             
             
