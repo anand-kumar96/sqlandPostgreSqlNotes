@@ -80,7 +80,7 @@
     --> Column number and colum should be same in both list.
     --> data type also should be same in ireesprctive column.
 
---> 03: https://github.com/anand-kumar96/SQL/assets/106487247/e762b843-ab46-4d5b-8916-49d4172cd495
+--> 03: https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/2722575c-ae0a-4464-82b9-a2fc8549eeb1
     --> Intersects : Find the rows common in the results of two queries. Removes duplicates
     --> Intersects All : Find the rows common in the results of two queries. do not Remove duplicates : not if common in both it means if one contains multiple then show duplicate 
     --> Except : Find the rows that are present in first query but not second query. Remove duplicates --> Remember duplicate remove from first : so order matter in except i mean which one is first query.
@@ -118,8 +118,8 @@
         7	Incredible Granite Mouse	Home        	989	2
 
 --> 04: Removing Commonalities With Except
-        https://github.com/anand-kumar96/SQL/assets/106487247/540776cd-8e7a-43db-9739-4f44c522af46
-        https://github.com/anand-kumar96/SQL/assets/106487247/d2655111-f1f4-46f7-8406-842ce8df65d0
+        https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/7dd702f9-2b37-49e4-b38f-e87b4a7efc11
+        https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/3810637c-55a8-49c2-ae43-824a0ad3b423
         (
           SELECT id, name 
           FROM products 
@@ -160,7 +160,7 @@
         56	Gorgeous Plastic Sausages    Movies	556	2
         8 	Gorgeous Rubber Ball	      Books	801	4
 
---> 05: Practice : https://github.com/anand-kumar96/SQL/assets/106487247/8ee0d4e6-db43-4cb4-90c2-33b6c65c849e
+--> 05: Practice : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/95116c30-140a-426f-8ace-999baa7edab6
 --> 06: Solution : 
         SELECT manufacturer 
         FROM phones
