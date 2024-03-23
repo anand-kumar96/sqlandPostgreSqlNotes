@@ -6,7 +6,7 @@
     --> else we can use Polymorphic association
     --> since we search hashtag and after clicking it we shown list of photos under posts
     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/879fa739-6ef4-483c-b8a1-f8f5899c5d01
-    
+
 --> 02: One possible way :https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/dc68f925-861f-4656-b9ce-4d35bf64a240
     --> for performance concern and to avoid duplication of title of hashtags we can seperate 
     --> like this : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/e5a71c23-fc7a-4b02-93c4-559264fcd2f4
@@ -78,4 +78,30 @@
 
     --> Design Image : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/245f203a-b8c1-4eeb-b2eb-1193593e6a03
 
---> 04: 
+--> 04: https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/e7202c0d-4556-4f0d-ad34-450b19bae16c
+    --> adding some users column
+    --> status for : online,active, offline, busy etc
+        Table users {
+        id SERIAL [pk, increment]
+        created_at TIMESTAMP
+        updated_at TIMESTAMP
+        bio VARCHAR(400)
+        username VARCHAR(30)
+        avatar VARCHAR(200)
+        phone VARCHAR(25)
+        email VARCHAR(50)
+        password VARCHAR(50)
+        status VARCHAR(15)
+        }
+--> 05: Why number of Followers and Posts is not stored on users table in seperate column?
+    --> Becoz there is seperate posts and followers table by which we can query total posts and total followers
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/be5b2621-e000-40ef-baf7-af39b706ec7f
+    --> For posts   
+        Select Count(*)
+        FROM posts
+        Where user_id = 123;
+    --> For followers
+        Select Count(*)
+        FROM followers
+        Where user_id = 123;
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/99f07016-2414-4f27-bfd3-69488233f29c
