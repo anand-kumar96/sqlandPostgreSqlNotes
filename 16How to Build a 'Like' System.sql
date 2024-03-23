@@ -40,7 +40,7 @@
 --> 04: Making a Recation System Design
     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/b79a1a2c-baff-4df4-86bf-7a218be2de61
 
---> 05: Plymorphic association : To allow uses to either like a post or like a comments
+--> 05: Polymorphic association : To allow uses to either like a post or like a comments
     --> 1st  Possible Solution :
     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/584c56e6-a96c-4b97-ab44-181806ed7c68
     --> Plymorphic association is not good as per data consistency : But still see in some ruby and rails project
