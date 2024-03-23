@@ -1,11 +1,11 @@
---> 1&2:https://github.com/anand-kumar96/SQL/assets/106487247/b5c84d2a-b5df-47be-9dee-c71245c41977  
+--> 1&2:https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/e005a2f9-3c3c-4313-bb6e-c626328a00d5
     --> user who created the comment on a photo
-    --> Some Query Questions : https://github.com/anand-kumar96/SQL/assets/106487247/1052ec2a-bd49-4563-b934-22002e9fd5df
+    --> Some Query Questions : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/e8ccbf33-cd5f-49f8-a3bb-fc4104ff04fc
     --> we solve  these questions using Joins and Aggregation
     --> Joins: Question1 , Aggregation: Question 2,3,4,5  
-    --> notes : https://github.com/anand-kumar96/SQL/assets/106487247/912ac560-6031-4054-a3aa-e833ee8602e7
+    --> notes : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/09e29194-48d8-4a97-bbaf-6ce849ee5290
         
---> 03: Question : https://github.com/anand-kumar96/SQL/assets/106487247/27e8b7a3-77b1-489e-893d-6d9d49e56b60
+--> 03: Question : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/d2e9966a-df6a-46f9-804c-6fe7f40f2370
     --> Answer
         Select contents, username 
         FROM comments
@@ -20,10 +20,10 @@
         Join Table2
         On someCondition;
     --> How it work => it start from FROM then it combine information of two table using join then from result of cobine it Select requird column.
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/0baa4694-0cbe-4038-aa8a-73409c51a8f7
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/3bbcdfaf-73b1-4333-8f7b-208ec674d1be
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/c9d72b18-b856-4d8d-ad85-013002405ed8
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/a3aa45de-f5c8-4bcc-8235-1c5030e974ea
 
---> 04: Question : https://github.com/anand-kumar96/SQL/assets/106487247/8cecd500-b608-4fa8-800f-fd5b39570141
+--> 04: Question : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/c7ca72dd-5a86-4628-8d60-25bb671b47b8
     --> Answer
         Select contents, url 
         FROM comments
@@ -33,7 +33,7 @@
         FROM photos
         JOIN comments On photos.id=comments.photo_id;
 
---> 05: Practice Question : https://github.com/anand-kumar96/SQL/assets/106487247/6a445701-22d0-4d22-b493-bc659160e9fd
+--> 05: Practice Question : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/c98cb3fc-9904-4a13-aab7-7a69b710bd97
         CREATE Table authors(
           id Serial PRIMARY KEY,
           name VARCHAR(50) 
@@ -65,7 +65,7 @@
         JOIN authors
         On books.author_id = authors.id;
 
---> 6&7:https://github.com/anand-kumar96/SQL/assets/106487247/3fb4da63-0b3a-4579-b7ad-96fb96ee578f
+--> 6&7:https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/62f3163a-daff-4850-9135-36013b8f443b
     --> 01
         Select contents, url 
         FROM comments
@@ -77,7 +77,7 @@
     --> above both give same answer but it make some diffrences so use first one
 
     --> 02: Combing two tables which contain same column name and retriving it may throw error so better to give some name
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/94b2f037-e97b-4f36-9891-af35e1cabf98
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/124873ae-78b7-4119-a96e-da37ce2dcc0a
         Select id 
         FROM photos
         JOIN comments
@@ -94,7 +94,7 @@
         JOIN comments As c
         On p.id = c.photo_id;
 
---> 08: https://github.com/anand-kumar96/SQL/assets/106487247/76943313-a5e2-400c-b6a9-0fe586018b23
+--> 08: https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/1969ea8b-acd0-4129-a228-32dd02a8a721
     --> Inserting photos referencing user_id Null
         INSERT INTO photos (url,user_id)
         VALUES ('http://banner.jpg',NULL);
@@ -113,13 +113,13 @@
         JOIN users As u
         On u.id = p.user_id;
     --> Behand the scene it will take all rows of photos and now join users w.r.t user_id and since user_id=Null not exist in users -> id so it will not select in overall result see images
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/2f7bd20c-9b95-4556-be27-e36f75462389
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/454d55af-ee47-4430-9562-a1606c7ec7c0
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/7cc5f5f2-1e9a-4730-9564-af7684da4016
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/c25d2ee9-1631-42b3-bebf-b792e6754df5
     --> So there is diferent types of joints 
 
 --> 10: There are Four Kinds Of joins 1) Inner Join 2) Left Join 3) Right Join 4) Full Join
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/a1931330-cb3e-4380-8aae-4d5a1883fb00
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/79abed4b-bc6d-4a2e-8867-455a7bbbde1a
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/2691c3a1-343a-4e01-8dbd-107feaa1f2d2
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/1e2e01b4-4150-4b88-b5bd-e723fabc69ff
     --> Inner Join              --> Left Join              --> Right Join            --> Full Join
         Select url, username       Select url, username       Select url, username       Select url, username
         FROM photos As p           FROM photos As p           FROM photos As p           FROM photos As p
@@ -158,9 +158,9 @@
         On u.id = p.user_id;
 --> 12: Ques: Does table order Matters ? 
     --> Ans: Yes it matters a lot when we are using left and right join see the image
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/e08837a3-ca16-4d23-ab20-bcb2a69f60b1
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/5bdef4a7-c90f-435a-95c8-2a4b6f595dce
 
---> 13: Practice Question: https://github.com/anand-kumar96/SQL/assets/106487247/3b74a1c5-f3c7-49cc-aa84-844e7d8a8537
+--> 13: Practice Question: https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/89877cf1-95a1-4a46-a254-b525d8675809
 --> 14: Solution two possible solution using left and right join
     --> Solution 1 :
         Select title, name 
@@ -173,11 +173,11 @@
         RIGHT JOIN authors
         On authors.id = books.author_id;
 --> 15: 'Where'  Clause with join : where always should after join means => From--> Join --> Where
-    --> Question : https://github.com/anand-kumar96/SQL/assets/106487247/fe9ef2f7-5b93-4f61-bf6a-c71ba68cbde2
+    --> Question : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/410c5814-7696-48bf-a1b4-dd819bc94c6e
     --> Statement : Select all photos and comment which is created and commented by same user
     --> Ans: 
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/850ce908-223a-4d11-99c3-4dfeec9cf9f5
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/a9eaf928-837a-4575-b001-7b3482b9d237
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/e59ddb15-1adb-4ff7-a90c-51aaf314d1a8
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/6c83f7e3-a21b-4d7f-b6bf-2938803d48c2
         Select url, contents
         FROM comments As c
         JOIN photos as p
@@ -185,8 +185,8 @@
         WHERE c.user_id = p.user_id;
 --> 16: But how to print username also Since We don't have access --> We use some advance techniques of join
     --> We use Three way Join --> Means we merge together 3 differents Tables
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/e8d25992-e4fe-4c98-9799-d2fa3ef49d89
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/5fbfe6a1-6adb-4d95-86ba-c2a96813fbec
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/cea972de-9a1d-4112-8d7a-b3796deb95ee
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/d720d25b-a198-4dd3-b8d8-03e60d815b1c
     --> Selecting url, contents, username 
         Select url,contents,username
         FROM comments As c 

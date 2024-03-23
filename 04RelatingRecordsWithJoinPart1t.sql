@@ -1,6 +1,6 @@
 --> 01: DataBase schema diagram : VVI #############
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/98fba156-5ea4-4b6d-81f0-761f1568ea33
-    --> https://github.com/anand-kumar96/SQL/assets/106487247/1e677a31-6a88-464e-9acb-dbb8c6ddabcd
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/c0267c60-cb94-414b-b325-1138c3119329
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/e511c05d-a9f0-4aa8-aebe-db1dd3e8584a
     --> Run some command
     --> delete users and photos table
         Drop Table users;
