@@ -39,3 +39,27 @@
 
 --> 04: Making a Recation System Design
     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/b79a1a2c-baff-4df4-86bf-7a218be2de61
+
+--> 05: Plymorphic association : To allow uses to either like a post or like a comments
+    --> 1st  Possible Solution :
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/584c56e6-a96c-4b97-ab44-181806ed7c68
+    --> Plymorphic association is not good as per data consistency : But still see in some ruby and rails project
+--> 05: 2nd
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/e2f49130-ab68-4908-bf40-ed99f2f55f33
+    --> We have to write a validation that likes have either post_id and comment_id, we have to ensure that both should not be null.
+    --> so this is also little bit complicated
+    --> COALESCE:it is a function which Return the first non-null value in a list:
+        SELECT COALESCE(NULL, NULL, NULL, 'W3Schools.com', NULL, 'Example.com'); --> it return: W3Schools.com
+        SELECT COALESCE((4):: BOOLEAN :: INTEGER ,0)--> 1
+        SELECT COALESCE((NULL):: BOOLEAN :: INTEGER ,0)--> 0
+    --> to check
+        CHECK (
+        (
+        (SELECT COALESCE((4)::BOOLEAN::INTEGER, 0)) +
+        (SELECT COALESCE((4)::BOOLEAN::INTEGER, 0))
+        ) = 1
+        );
+--> 06: 3rd Best and Simplest Solution
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/d14a3acf-4bf1-4f9c-9f56-adcd023d92ab
+        
+  
