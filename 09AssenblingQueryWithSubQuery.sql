@@ -119,20 +119,20 @@
         FROM products
         WHERE price/weight > 5
         );
-    --> https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/2e490d70-fcee-4ba7-8c31-8d46e8d48ba1
-    --> https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/70e84bbb-e5e9-4080-a7d0-d36dc09814e7
-    --> https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/d03366d6-f9a7-4771-b971-8bf3ae4fa4ce
-    --> https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/b0349f19-451b-499c-8968-0c3d4279b4da
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/a9ba763f-d3ce-4718-badb-06e8d81215dc
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/485438d3-a2bf-4dd2-b263-e81622df3efd
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/85020cbf-9107-468f-901e-90ffdc951ffa
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/b5b6b811-1e63-4ed3-a22a-8594ef271691
 
---> 13: https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/25c577d1-c617-4929-9700-40cd6ba784e7 
-    --> https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/f3f5674a-240e-445b-8213-36c4d00cbc08
+--> 13: https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/b6c6be6b-0040-41b9-8bc0-2dc8d60a8850
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/a72478b2-2749-4d02-9525-e9b99520044c
         SELECT name 
         FROM products
         WHERE price > (
          Select AVG(price)
          FROM products
         );
---> 14: Exercise : https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/90c1f27a-2ae6-4f83-aaa0-b33e838e19e0
+--> 14: Exercise : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/182d1d16-e3fd-4845-b55d-19f0abc0335f
 --> 15: Solution
         SELECT name,price
         FROM phones 
@@ -141,7 +141,7 @@
          FROM phones 
          WHERE name = 'S5620 Monte' AND manufacturer = 'Samsung'
         );
---> 16: Not In Opetrator with a list : https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/5a61429d-e25b-4fcc-a3dc-6f5d638ac2ed
+--> 16: Not In Opetrator with a list : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/d6524ab9-6f95-43a5-8fd0-eb7c91f399f8
     --> Solution
         SELECT name,department
         FROM products
@@ -150,7 +150,7 @@
          FROM products
          WHERE price < 100
         );
---> 17: A New Where Keyword : https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/91ca9d42-2ebe-4171-9499-6ebbc4300f19
+--> 17: A New Where Keyword : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/1e0c04ba-1159-47d0-a8c2-f654b2db3d39
     --> Solution
         SELECT name,department,price
         FROM products
@@ -201,7 +201,7 @@
         );
 --> 18: Some Keyword : Some is actually an Alias to Any => so Some and Any both are same => means atleast
     --> price >Some (20,100) --> price is greater than atleast one value from 20 and 100
-    --> Question: https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/7ed17738-664e-4801-bedb-b7a6f174d0e2
+    --> Question: https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/d2938b1f-cfae-4a8d-a083-259cf477d401
         SELECT name,department,price
         FROM products
         WHERE price > SOME (
@@ -210,7 +210,7 @@
          WHERE department = 'Indust;rial'
         );
 
---> 19: Exercise : https://github.com/anand-kumar96/Scaler_Academy/assets/106487247/b5bb1913-c20b-4f1b-8b94-d4ff51d0e3cd
+--> 19: Exercise : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/e8d783ac-ebe0-4981-b253-124ba2b6d252
 --> 20: Solution
         SELECT name, manufacturer, price
         FROM phones
