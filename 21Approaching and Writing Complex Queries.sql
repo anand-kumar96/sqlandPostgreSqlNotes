@@ -1,4 +1,5 @@
 --> 01: downloading fake data : database backup
+
 --> 02: now select database in pgadmin and click and select restore and select downloaded file 
     --> Restore option :  verbose messages-> yes, only data: Yes, donot save-> owner:yes, query--> single transcation : yes , disbale -> trigger:yes
     --> now restore
@@ -97,12 +98,14 @@
             follower_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
             UNIQUE(leader_id, follower_id)
         );
+
 --> 04: https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/db556f14-78ef-4a04-9c72-b143f4b176d8
 --> 05: Solution
         SELECT * 
         FROM users
         ORDER BY id DESC 
         LIMIT 3;
+
 --> 06: https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/05527478-da95-4895-a6d4-7ddbae265cad
 --> 07: Solution
         SELECT u.username, p.caption
@@ -110,6 +113,7 @@
         JOIN users As u
         On u.id = p.user_id
         WHERE p.user_id = 200;
+        
 --> 08: hhttps://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/4e2ec1ed-aee5-4148-9627-31b1241ebea8
 --> 09: Solution
         SELECT username, Count(*) AS total_likes
