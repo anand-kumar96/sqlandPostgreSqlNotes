@@ -82,4 +82,23 @@
         ON users.id = suggestions.leader_id
         WHERE suggestions.depth > 1
         LIMIT 30;
+--> 05: Explanation : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/781fea6c-d210-436c-b701-a4d58539a720
+        WITH RECURSIVE suggestions(leader_id, follower_id, depth) As (
+            SELECT leader_id, follower_id, 1 As depth
+            FROM followers
+            WHERE follower_id = 1 
+	    UNION
+            SELECT followers.leader_id, followers.follower_id, depth + 1
+            FROM followers
+            JOIN suggestions ON suggestions.leader_id = followers.leader_id
+            WHERE depth < 2
+        )
+
+        SELECT DISTINCT users.id, users.username
+        FROM users
+        JOIN suggestions
+        ON users.id = suggestions.leader_id
+        WHERE suggestions.depth > 1
+        LIMIT 30;
     
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/7ee0b32a-547d-4b4f-b830-2267c95f556f
