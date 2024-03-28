@@ -29,11 +29,19 @@
         ON tags.user_id = users.id
         WHERE tags.created_at  < '2010-01-7';
 
---> 03: Commaon Table Expression : 
+--> 03: Commaon Table Expression : The CTE , also known as the WITH clause.
      /* A Common Table Expression (CTE) is the result set of a query which exists temporarily and for use 
         only within the context of a larger query. Much like a derived table, 
         the result of a CTE is not stored and exists only for the duration of the query.
+        There are two type of CTE
+        1) Non Recursive CTE
+        2) Recursive CTE
      */
+    --> Syntax
+        WITH cte_name AS (cte_query_definition)
+        SELECT *
+        FROM   cte_name;
+
     --> Example
         With tags As (
 	         SELECT user_id, created_at FROM photo_tags
