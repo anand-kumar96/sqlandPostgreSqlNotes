@@ -64,5 +64,22 @@
     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/e5d425a1-c162-4f23-ad57-ab8ad48c67a3
     --> Since above image also showing tree type structure so use Recursive CTE.
 
---> 04: 
+--> 04: leader_id : user which is followed by someone, follower_id : user who is following
+        WITH RECURSIVE suggestions(leader_id, follower_id, depth) As (
+            SELECT leader_id, follower_id, 1 As depth
+            FROM followers
+            WHERE follower_id = 1000
+	    UNION
+            SELECT followers.leader_id, followers.follower_id, depth + 1
+            FROM followers
+            JOIN suggestions ON suggestions.leader_id = followers.leader_id
+            WHERE depth < 3
+        )
+
+        SELECT DISTINCT users.id, users.username
+        FROM users
+        JOIN suggestions
+        ON users.id = suggestions.leader_id
+        WHERE suggestions.depth > 1
+        LIMIT 30;
     
