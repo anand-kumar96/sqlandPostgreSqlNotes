@@ -66,4 +66,87 @@
     --> What is View ?  
     --> A view is a virtual table that contains rows and columns of data, and is based on the result set of an SQL statement. 
     --> Views are useful for organizing tables in a database and can simplify complex queries, data access, and security.
-    --> 
+    --> but a view doesn’t store data on the disk like a table.
+    --> Creating View Syntax
+        CREATE VIEW view_name AS
+        SELECT column1, column2.....
+        FROM table_name
+        WHERE condition;
+    --> now simplyfying above query using view
+        CREATE VIEW tags AS (
+        SELECT id, created_at, user_id, post_id, 'photo_tag' AS type FROM photo_tags
+        UNION ALL
+        SELECT id, created_at, user_id, post_id, 'caption_tag' AS type FROM caption_tags
+        );
+    --> now 
+        SELECT * FROM tags; 
+
+        SELECT * 
+        FROM tags
+        WHERE type = 'caption_tag'
+        ;
+
+    --> Now Best Solution of Question using view 
+        SELECT username, Count(*)
+        from users 
+        JOIN tags 
+        On tags.user_id = users.id
+        GROUP BY username
+        ORDER BY Count(*) DESC; 
+
+--> 04: When to use View ?
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/6f3be441-a1b2-4e57-b560-d028c2c15beb
+    --> To Solve simillar type of problems i mean to avoid writing same query for multiple problems we can use View.
+    --> Shows the users who created the 10 most recent posts
+    --> creating recent_post view
+        CREATE VIEW recent_posts AS (
+            SELECT *
+            FROM posts
+            ORDER BY created_at DESC
+            LIMIT 10
+        );
+
+    --> Query 1
+        SELECT user_id, username, rp.created_at AS post_created_at
+        FROM recent_posts as rp
+        JOIN users
+        ON users.id = rp.user_id;
+
+    --> Query 2
+        SELECT likes.post_id, Count(*) as total_likes
+        FROM recent_posts
+        JOIN likes 
+        ON likes.post_id = recent_posts.id
+        GROUP BY likes.post_id;
+
+    --> Query 3
+        SELECT username  
+        FROM recent_posts 
+        JOIN users 
+        On users.id = recent_posts.user_id;
+
+    --> Query 4
+        SELECT hashtag.post_id, hashtag.title as hashtag_title
+        FROM recent_posts
+        JOIN (
+            SELECT post_id, h.title
+            FROM hashtags_posts
+            JOIN hashtags AS h
+            ON hashtags_posts.hashtag_id = h.id
+        ) As hashtag
+        ON hashtag.post_id = recent_posts.id; 
+
+    --> Query 5
+        SELECT recent_posts.id as post_id, AVG(hashtags_posts.hashtag_id) as Average_hashtags
+        FROM recent_posts
+        JOIN hashtags_posts 
+        ON hashtags_posts.post_id = recent_posts.id
+        GROUP BY recent_posts.id;
+
+    --> Query 6
+        SELECT COUNT(*) as total_comments
+        FROM recent_posts
+        JOIN comments 
+        ON recent_posts.id = comments.post_id;
+
+--> 05: 
