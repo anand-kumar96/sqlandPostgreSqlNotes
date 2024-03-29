@@ -149,4 +149,16 @@
         JOIN comments 
         ON recent_posts.id = comments.post_id;
 
---> 05: 
+--> 05: Deleting and Creating post
+    --> create or replace
+        CREATE OR REPLACE VIEW recent_posts As (
+        SELECT * 
+        FROM posts
+        ORDER BY created_at DESC
+        LIMIT 15
+        );
+
+        SELECT * FROM recent_posts;
+
+    --> Delete View
+        DROP VIEW recent_posts;
