@@ -13,4 +13,17 @@
         d) Durability − ensures that the result or effect of a committed transaction persists in case of a system failure.
     */
     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/d2b9bea3-965e-4d29-baac-8fbcdf8f534d
-    
+
+--> 02: Creating account table
+        CREATE TABLE account(
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(20) NOT NULL,
+        balance INTEGER NOT NULL,
+        CHECK(balance > 0)
+        );
+    --> Inserting data
+        INSERT INTO account(name, balance)
+        VALUES ('Alyson', 100),
+               ('Ziya', 100);
+
+--> 03: 
