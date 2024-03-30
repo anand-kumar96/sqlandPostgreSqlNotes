@@ -15,15 +15,38 @@
     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/d2b9bea3-965e-4d29-baac-8fbcdf8f534d
 
 --> 02: Creating account table
-        CREATE TABLE account(
+        CREATE TABLE accounts (
         id SERIAL PRIMARY KEY,
         name VARCHAR(20) NOT NULL,
         balance INTEGER NOT NULL,
         CHECK(balance > 0)
         );
     --> Inserting data
-        INSERT INTO account(name, balance)
+        INSERT INTO accounts (name, balance)
         VALUES ('Alyson', 100),
-               ('Ziya', 100);
+               ('Gia', 100);
 
---> 03: 
+--> 03: Opening and Closing Transaction
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/29c8af7d-36b8-47fd-92d4-52262304d285
+    --> open two query tool window and execute BEGIN in one of them then it will create seperate transaction
+    --> To Start Transaction in first query tool write command 
+        BEGIN; 
+    --> now first query :
+        UPDATE accounts
+        SET balance = balance - 50
+        WHERE name = 'Alyson';
+        
+        SELECT * FROM accounts;
+    --> in this connection we get
+      /* id    name   balance   
+          1    Gia       100
+          2    Alyson     50
+      */
+
+    --> in 2nd query tool execute 
+        SELECT * FROM accounts;
+      /* id    name   balance   
+          1    Gia       100
+          2    Alyson     100
+      */
+    --> Because both query are executing in different enviroment.
