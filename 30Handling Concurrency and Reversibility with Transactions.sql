@@ -67,14 +67,56 @@
         The COMMIT command is the transactional command used to save changes invoked by a transaction. 
         It saves all the transactions occurred on the database since the last COMMIT or ROLLBACK.
         */
+
     --> 2 ROLLBACK: used to dump all pending changes and delete the seperate workspace.
     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/bcacfb90-872b-4cba-8aee-f7afef3d06aa
         /*
         The ROLLBACK command is the transactional command used to undo transactions that have not already been saved to the database. 
         This command can only undo transactions since the last COMMIT or ROLLBACK.
         */
+
     --> 3 Running a bad command will put the transaction in an 'aborted' state - you must rollback. in such situation
     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/2f2f3fd8-f802-4d27-a90b-21272ffae2e6
 
-    --> Losing the connection (crashing) willautomatically rollback the transaction
+    --> 4 Losing the connection (crashing) willautomatically rollback the transaction
     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/7f1688f6-ee14-4e70-bd0a-203cc493325a
+
+    --> now commit from first query tool
+        COMMIT;
+    --> now execute in both query tool below command we will get same output
+        SELECT * FROM accounts;
+
+--> 04: Transaction Cleanup on crash
+    --> Case 1: We are going to open a transaction and  substract 50 dollar from Alyson then simulate a crash 
+        : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/0571fbf1-2d07-49a2-ac73-83f3f2a6552f
+    --> When crash occur during a transaction postgress automatically delete that transaction and not commit any the of change data back to main data.
+    --> first of all reset all rows and make 100 dollar both have
+        UPDATE accounts
+        SET balance = 100;
+    --> Start from here
+        BEGIN;
+    --> now do one transaction
+        UPDATE accounts 
+        SET balance = balance - 50
+        WHERE name = 'Alyson';
+    --> to crash go to above dashboard and close both below idle
+    --> we will find that transaction is terminated so postgress terminate it => now we can see that both have 100 dollar
+        SELECT * FROM accounts;    
+
+--> 05: Closing Aborted transaction
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/b36428db-30b7-42fb-b145-4a646b10257a
+        BEGIN;
+
+        SELECT * FROM gshchsgchsc;
+        /*
+        ERROR:  relation "gshchsgchsc" does not exist
+        LINE 1: SELECT * FROM gshchsgchsc;
+       */
+    --> Since We got an error after running any command transaction will be aborted
+        SELECT * FROM accounts;
+    --> ERROR: current transaction is aborted, commands ignored until end of transaction block 
+    --> So end the transaction block we use ROLLBACK;
+        ROLLBACK;
+        
+    --> now it won't throgh error
+        SELECT * FROM accounts;
