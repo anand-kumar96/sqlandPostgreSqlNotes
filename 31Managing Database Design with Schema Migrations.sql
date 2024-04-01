@@ -96,7 +96,7 @@
             `);
         };
     --> now run this command to execute migration file
-        set DATABASE_URL=postgres://username:password@localhost:5432/socailnetwork&&npm run migrate down
+        set DATABASE_URL=postgres://username:password@localhost:5432/socailnetwork&&npm run migrate up
     --> it will execute both migration file 
      /* ### MIGRATION 1711953855147_table-comments (UP) ###
 
