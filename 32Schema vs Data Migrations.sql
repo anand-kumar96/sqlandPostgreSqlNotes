@@ -51,6 +51,76 @@
         Migrations complete!
      */
 
---> 05: Creating Web app
+-->5&6: Creating Web app
     --> install express pg dotenv and write index.js
-        
+    --> code in IG folder
+
+--> 07: Addling loc(location) Column
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/2ab09b5f-1f3a-4f56-bc09-d52967b38952
+    --> Step 1 : Generate migration file for adding loc column
+        exports.up = pgm => {
+        pgm.sql(`
+        ALTER TABLE posts
+        ADD COLUMN loc POINT;
+        `);
+        };
+
+        exports.down = pgm => {
+        pgm.sql(`
+        ALTER TABLE posts
+        DROP COLUMN loc;
+        `);
+        };
+    --> execute migration file
+        set DATABASE_URL=postgres://username:password@localhost:5432/socailnetwork&&npm run migrate up
+     /* ### MIGRATION 1712033205449_add-loc-to-posts (UP) ###
+        ALTER TABLE posts
+        ADD COLUMN loc POINT;;
+        INSERT INTO "public"."pgmigrations" (name, run_on) VALUES ('1712033205449_add-loc-to-posts', NOW());
+        Migrations complete!
+     */
+
+--> 08: Step 2 : now change server code to show location column
+    --> modifing createpost
+        exports.createPost = async(req,res)=>{
+        const{lng,lat} = req.body;
+        await pool.query(`
+        INSERT INTO posts(lat,lng,loc) 
+        VALUES ($1,$2,$3);`,
+        [lat,lng,`(${lng}, ${lat})`]
+        );
+        res.redirect('/posts');
+        }
+    --> now create post and see in pg admin
+--> 09: copy lat/lng to loc
+    --> method 1 : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/e9fa97ae-1152-44f6-a067-db543cedd9ef
+    --> issue with first method : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/75ca7d52-5385-475e-bd0b-3f717649c0cc
+    ---> method 02 : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/4e4d572b-8c50-48b4-bdfe-bb7f4105d008
+    --> In both method there is a big issue that if our bulk update transaction is running for long time and if user want to update his data 
+    --> which is lock since it is proccessed by transaction 1 then user transcation should have to wait unitil transcation 1
+    --> did not completed all update
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/2d1f17b4-cb46-4254-9bbc-f637dd447a2d
+    --> Open two query tool window in pgadmin and open transaction in 1 and transaction in 2
+    --> in transcation 1
+        SELECT * FROM posts;
+
+        BEGIN;
+
+        UPDATE posts
+        SET lat = 56
+        WHERE id = 1;
+    
+    --> in transcation 2
+        SELECT * FROM posts;
+
+        UPDATE posts
+        SET lat = 60
+        WHERE id = 1;
+    --> it will show : waiting for the query to complete...
+    --> here transcation 1 is bulk update transaction and transcation 2 is to update the user data
+    --> now comit the transaction 1
+        COMMIT;
+    --> as we commited transaction 2 processed and update completed
+
+    --. So better way to do batch update means we are going to update in chunk wise means 1million each time, i know biggest downside
+    --> is that we can not update whole in one go but it will be better.
