@@ -58,6 +58,8 @@
 --> 07: Addling loc(location) Column
     --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/2ab09b5f-1f3a-4f56-bc09-d52967b38952
     --> Step 1 : Generate migration file for adding loc column
+        npm run migrate create add loc to posts 
+    --> write migration file code
         exports.up = pgm => {
         pgm.sql(`
         ALTER TABLE posts
@@ -73,6 +75,7 @@
         };
     --> execute migration file
         set DATABASE_URL=postgres://username:password@localhost:5432/socailnetwork&&npm run migrate up
+
      /* ### MIGRATION 1712033205449_add-loc-to-posts (UP) ###
         ALTER TABLE posts
         ADD COLUMN loc POINT;;
@@ -92,7 +95,7 @@
         res.redirect('/posts');
         }
     --> now create post and see in pg admin
---> 09: copy lat/lng to loc
+--> 09: Step 3 => copy lat/lng to loc
     --> method 1 : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/e9fa97ae-1152-44f6-a067-db543cedd9ef
     --> issue with first method : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/75ca7d52-5385-475e-bd0b-3f717649c0cc
     ---> method 02 : https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/4e4d572b-8c50-48b4-bdfe-bb7f4105d008
@@ -124,3 +127,68 @@
 
     --. So better way to do batch update means we are going to update in chunk wise means 1million each time, i know biggest downside
     --> is that we can not update whole in one go but it will be better.
+
+--> 10: https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/0b988ab6-7695-4513-88c8-d20941528d8e
+    --> using option 2
+    --> in migration folder create data folder and write a file 01-lng-lat-to-loc.js
+        const pool = require("../../pool");
+        pool.query(`
+        UPDATE posts
+        SET loc = POINT(lng,lat)
+        WHERE loc IS NULL 
+        `)
+        .then(()=>{
+            console.log("Update completed");
+            pool.end();
+        })
+        .catch((err)=>{
+            console.log(err.message)
+        });
+
+--> 11&12: Step 4 => Updating the app services 
+    --> changing create post
+        exports.createPost = async(req,res)=>{
+        const{lng,lat} = req.body;
+        await pool.query(`
+        INSERT INTO posts(loc) 
+        VALUES ($1);`,
+        [`(${lng}, ${lat})`]
+        );
+        res.redirect('/posts');
+        }
+
+    --> now create posts using server and see in pgadmin lat, lng are null
+
+--> 13: Step 5: Dropping the Column lat & lng
+    --> generating anotther migration
+        npm run migrate create drop lng and lat
+    --> write migration file code
+        exports.up = pgm => {
+        pgm.sql(`
+        ALTER TABLE posts
+        DROP COLUMN lat,
+        DROP COLUMN lng;
+        `);
+        };
+
+        exports.down = pgm => {
+        pgm.sql(`
+        ALTER TABLE posts
+        ADD COLUMN lat NUMERIC,
+        ADD COLUMN lng NUMERIC;
+        `);
+        };
+
+    --> execute migration file
+        set DATABASE_URL=postgres://username:password@localhost:5432/socailnetwork&&npm run migrate up
+     /*
+        ### MIGRATION 1712041704055_drop-lng-and-lat (UP) ###
+
+        ALTER TABLE posts
+        DROP COLUMN lat,
+        DROP COLUMN lng;
+        
+        INSERT INTO "public"."pgmigrations" (name, run_on) VALUES ('1712041704055_drop-lng-and-lat', NOW());
+
+        Migrations complete!
+     */
