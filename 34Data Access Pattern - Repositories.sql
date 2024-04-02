@@ -16,3 +16,28 @@
 
         ###
         http://localhost:3005/users
+
+--> 04: Since in javascript we use cameCase convention so created_at can be writter as createdAt
+    --> So we need to Casting
+        users[0].created_at;
+
+    --> We have 3 option available
+    --> 1 we rename the column : but thats not a good idea since we will not follow then sql convention.
+    --> 2 We can change the database level
+    --> 3 after doing any query we will do some proccessing or parsing 
+
+--> 05: Fixing Casting
+    --> Converting snake_case or kebab-case to camelCase.
+        exports.toCamelCase = (rows) => {
+            const parsedRows = rows.map(row => {
+                const replaced = {};
+                for(let key in row) {
+                const camelCase = key.replace(/([-_][a-z])/gi, ($1) =>
+                $1.toUpperCase().replace('_','')
+                );
+                replaced[camelCase] = row[key];
+                }
+                return replaced;
+            })
+        return parsedRows;
+        }

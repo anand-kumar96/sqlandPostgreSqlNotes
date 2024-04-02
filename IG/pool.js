@@ -1,7 +1,6 @@
 const pg = require('pg');
 const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
-
 const pool = new pg.Pool({
     host: process.env.HOST,
     port: process.env.PORT,
