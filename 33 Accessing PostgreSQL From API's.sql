@@ -53,4 +53,5 @@
         module.exports = new Pool();
 
 --> 06: Validating Connection Credentials
-        
+
+--> 07: Query and Close
