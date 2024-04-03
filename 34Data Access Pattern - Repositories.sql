@@ -41,3 +41,5 @@
             })
         return parsedRows;
         }
+
+--> 06: Finding particular user
