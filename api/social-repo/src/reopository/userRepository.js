@@ -54,13 +54,20 @@ class UserRepo {
 
     /// @@@DELETING DATA BY ID
     static async delete(id) {
-    const {rows} = await pool.query(`
-    DELETE FROM users
-    WHERE id = $1
-    RETURNING *;
-    `, [id]);
+        const {rows} = await pool.query(`
+        DELETE FROM users
+        WHERE id = $1
+        RETURNING *;
+        `, [id]);
 
-    return toCamelCase(rows)[0]
+        return toCamelCase(rows)[0]
+    }
+
+    /// @@@ Total users
+    static async count () {
+        const {rows} = await pool.query(`SELECT COUNT(*) FROM users`);
+
+        return parseInt(rows[0].count);
     }
 }
 
