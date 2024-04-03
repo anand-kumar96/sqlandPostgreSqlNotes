@@ -157,4 +157,173 @@
     --> now it will pass the test
 
 --> 07: Issues with Parallel testing
-    --> 
+    --> to run jest file we change script :=> "test":"jest --no-cache"
+    --> duplicate the test file
+        userRoutes.test.js
+        userRoutes-two.test.js
+        userRoutes-three.test.js
+    --> run the test
+        npm run test
+    --> test fail
+    /*  expect(received).toEqual(expected) // deep equality
+        Expected: 1
+        Received: 3
+
+        32 |
+        33 |     const finishCount = await UserRepo.count();
+        > 34 |     expect(finishCount - startingCount).toEqual(1);
+            |                                         ^
+        35 | })
+
+        at Object.toEqual (src/test/routes/userRoutes-three.test.js:34:41)
+
+        Test Suites: 3 failed, 3 total
+        Tests:       3 failed, 3 total
+        Snapshots:   0 total
+        Time:        3.161 s
+        Ran all test suites.
+    */
+    --> lets understand
+    --> for 1 test file: 
+        https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/24fe94a8-b0cd-455f-a9be-207145411927
+    --> for multiple test file:https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/300015d7-e854-45ce-8742-8d444c15934f
+    --> for multiple parallel test execution we are facing some overlapping issue
+--> 08: we can solve this conflict in two ways
+    --> 01: By creating own database for each test file
+        https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/b1556bb8-cd37-4d1d-8173-39f65f8c79ed
+    --> downside for this approach is that if we have n different test file then we have to create n diffent database
+    --> 02: Each test file get its own schema 
+        https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/6629333e-6b9a-42e0-943f-0e8619d59240
+    --> What is schema?
+    --> By deault pg admin create a default schema => public we can see in pg admin
+        https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/4150ed5a-a076-4107-8167-46442692be1b
+
+--> 09: Creating and accessing schema
+    --> creating schema in socialnetwork-test database and creating users table similiar to public schema
+    --> pg admin and open query tool
+        CREATE SCHEMA test ;
+    --> to create table in test schema
+        CREATE TABLE test.users(
+            id SERIAL PRIMARY KEY,
+            bio VARCHAR(30),
+            username VARCHAR(200)
+        );
+    --> INSERT row in test schema users table
+        INSERT INTO test.users(bio,username)
+        VALUES ('This is about alice', 'Alice'),
+              ('This is about me', 'Zoy');
+    --> getting all users
+        SELECT * FROM test.users;
+
+--> 10: how postgres know which schema should we access if not mention in query
+        SELECT * FROM users; --> default use public schema
+    --> this can be done by postgres because postgres uses internally search_path variable
+    --> to see run below command in query tool
+        SHOW search_path;
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/553edf34-e743-4808-872d-ab1ab84e801e
+    --> changing serach path default 
+        SET search_path TO test, public;
+    --> rather than default use public schema it uses test schema
+        SELECT * FROM users; 
+    --> change back to default as public
+        SET search_path TO "$user" , public;
+
+--> 11: Routing Schema Access
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/9fdf9bf9-f2dc-4678-980d-7930a26d7e52
+    --> we can do by pasing schema name argument to count function : it will work but we go through other way
+
+--> 12: if we connecting a schema with same name as user name i.e. if user name is asdf and schema name is asdf then
+    --> while running query SELECT * FROM users; => it will not look by default public firts it look asdf user schema if 
+    --> it present the it uses that schema else uses public schema
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/eb5b2afb-a876-4a22-addd-5f36155bfb47
+    --> https://github.com/anand-kumar96/sqlandPostgreSqlNotes/assets/106487247/da43b1ef-f53f-470f-a616-ae4ce2bf01df
+    --> We will repeat exact same process for all test file
+
+--> 13: Programmatic Schema Creation
+    --> userRoutes.test.js
+        const request = require('supertest');
+        const buildApp = require('../../app');
+        const UserRepo = require('../../reopository/userRepository');
+        const dotenv = require('dotenv')
+        dotenv.config({path:"./config.env"})
+        const pool = require('../../pool');
+        const {randomBytes} = require('crypto') // to generatea series of number of letters
+        const {default: migrate} = require('node-pg-migrate')
+        const format = require('pg-format')
+
+        beforeAll( async () => {
+    --> Randomly generating a role name to connect to PG as
+        const roleName = 'a' + randomBytes(4).toString('hex'); --> to start string aleways with letter append a
+
+    --> Connect to PG as usual
+        await pool.connect({
+            host: process.env.HOST,
+            port: process.env.PORT,
+            database: 'socialnetwork-test',
+            user: process.env.USER,
+            password: process.env.PASSWORD
+        })
+    --> Create a new role
+        await pool.query(`
+            CREATE ROLE ${roleName} WITH LOGIN PASSWORD '${roleName}';
+        `)
+
+    --> Create a schema with the same name
+        await pool.query(`
+            CREATE SCHEMA ${roleName} AUTHORIZATION ${roleName};
+        `)
+
+    --> Disconnect entirely from PG 
+        await pool.close();
+
+    --> Run our migrations in the new schema
+        await migrate({
+            schema: roleName,
+            direction:'up',
+            log:()=>{},
+            noLock:true,
+            dir:'migrations',
+            databaseUrl:{
+                host: process.env.HOST,
+                port: process.env.PORT,
+                database: 'socialnetwork-test',
+                user: roleName,
+                password: roleName
+            }
+        })
+    --> Connect to PG as the newly created role
+        await pool.connect({
+            host: process.env.HOST,
+            port: process.env.PORT,
+            database: 'socialnetwork-test',
+            user: roleName,
+            password: roleName
+        })
+        });
+
+    --> Naturally exist
+        afterAll(()=>{
+            return pool.close();
+        });
+
+    --> automation test to check user
+        it('create a user', async() => {
+            const startingCount = await UserRepo.count();
+
+            await request(buildApp())
+                .post('/users')
+                .send({username:'testuser', bio:'test bio'})
+                .expect(200);
+            
+            const finishCount = await UserRepo.count();
+            expect(finishCount - startingCount).toEqual(1);
+        })
+
+--> 14 : Escaping Identifier: to prevent Sql injection => we can not use parameterized style as we use using $ and array since 
+    --> in offical documentation mention that parameterized style not work in case of identifier: (databsename, column name,table, schema name)
+    --> here rolename is schema name
+
+--> 15: Create Test Helper
+
+--> 16: cleanup Schema and roles
+--> 17: all test case passed !!
