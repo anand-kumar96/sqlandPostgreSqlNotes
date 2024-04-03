@@ -1,0 +1,25 @@
+### GET REQUEST
+http://localhost:3005/users
+
+### POST REQUEST
+
+POST http://localhost:3005/users HTTP/1.1
+Content-Type: application/json
+
+{
+"username":"cookiee123",
+"bio":"I am a cookiee"
+}
+
+### PUT REQUEST
+PUT http://localhost:3005/users/7 HTTP/1.1
+Content-Type: application/json
+
+{
+"username":"cookiee1234",
+"bio":"I am a cookiee part2"
+}
+
+### DELETE REQUEST
+DELETE http://localhost:3005/users/6 HTTP/1.1
+Content-Type: application/json
